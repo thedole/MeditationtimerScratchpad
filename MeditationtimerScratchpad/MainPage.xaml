@@ -8,6 +8,9 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Margin="10,67,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="119"/>
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="146,67,0,0" VerticalAlignment="Top" Click="button_Click"/>
+        <TextBox x:Name="output" Text="Type in the number of seconds to wait" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" IsReadOnly="True"  VerticalAlignment="Top" Width="201"/>
 
     </Grid>
 </Page>
