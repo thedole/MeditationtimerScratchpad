@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 using Meditationtimer.Core;
 using Windows.UI.Core;
 using Windows.UI;
@@ -44,9 +34,21 @@ namespace MeditationtimerScratchpad
             input.BorderBrush = new SolidColorBrush(Color.FromArgb(128, 0, 255, 0));
 
             var timer = new Timer(new TimeSpan(0, 0, seconds));
+            timer.Started += Timer_Started;
             timer.Completed += Timer_Completed;
             timer.Start();
-            output.Text = "Timer started";
+            
+        }
+
+        async private void Timer_Started(object sender)
+        {
+            await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                () =>
+                {
+                    output.Text = "Timer started";
+                }
+            );
+            
         }
 
         async private void Timer_Completed(object sender)

@@ -27,9 +27,10 @@ namespace Meditationtimer.Core
             });
 
             t.Start();
+            OnStarted();
         }
         
-        protected void OnStart()
+        protected void OnStarted()
         {
             Started(this);
         }
