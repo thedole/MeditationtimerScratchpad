@@ -111,6 +111,8 @@
     <Compile Include="TimerCompletedEventArgs.cs" />
     <Compile Include="TimerCompletedEventHandler.cs" />
     <Compile Include="TimerStartedEventHandler.cs" />
+    <Compile Include="TimerUpdatedEventArgs.cs" />
+    <Compile Include="TimerUpdatedEventHandler.cs" />
     <EmbeddedResource Include="Properties\Meditationtimer.Core.rd.xml" />
   </ItemGroup>
   <ItemGroup>

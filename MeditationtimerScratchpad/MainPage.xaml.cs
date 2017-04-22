@@ -35,6 +35,7 @@ namespace MeditationtimerScratchpad
 
             var timer = new Timer(new TimeSpan(0, 0, seconds));
             timer.Started += Timer_Started;
+            timer.Updated += Timer_Updated;
             timer.Completed += Timer_Completed;
             timer.Start();
             
@@ -42,22 +43,32 @@ namespace MeditationtimerScratchpad
 
         async private void Timer_Started(object sender)
         {
-            await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+            await output.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                 () =>
                 {
                     output.Text = "Timer started";
                 }
             );
+        }
+
+        async private void Timer_Updated(object sender, TimerUpdatedEventArgs args)
+        {
+            var text = $"{args.TimeLeft.Seconds:d}";
             
+            await input.Dispatcher.RunAsync(CoreDispatcherPriority.High,
+                () =>
+                {
+                    input.Text = text;
+                }
+            );
         }
 
         async private void Timer_Completed(object sender)
         {
-            await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+            await output.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                 () =>
                 {
                     output.Text = "Completed";
-                    // Your UI update code goes here!
                 }
             );
         }
