@@ -53,7 +53,7 @@ namespace MeditationtimerScratchpad
 
         async private void Timer_Updated(object sender, TimerUpdatedEventArgs args)
         {
-            var text = $"{args.TimeLeft.Seconds:d}";
+            var text = $"{Math.Ceiling(args.TimeLeft.TotalSeconds)}";
             
             await input.Dispatcher.RunAsync(CoreDispatcherPriority.High,
                 () =>

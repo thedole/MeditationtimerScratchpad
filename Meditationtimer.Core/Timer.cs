@@ -26,16 +26,21 @@ namespace Meditationtimer.Core
             var stopWatch = new Stopwatch();
             stopWatch.Start();
             var remaining = Duration.TotalSeconds - stopWatch.Elapsed.TotalSeconds;
-            while (remaining >= 1)
+            while (remaining > 0.01)
             {
                 await Task.Run(async () => {
-                    await Task.Delay(1000);
+                    await Task.Delay(UpdateDelay(remaining));
                 });
                 
                 OnUpdated(stopWatch.Elapsed);
                 remaining = Duration.TotalSeconds - stopWatch.Elapsed.TotalSeconds;
             }
+            OnUpdated(Duration);
             OnCompleted();
+        }
+        private int UpdateDelay(double remaining)
+        {
+            return remaining > 1 ? 1000 : (int)(remaining * 1000);
         }
 
         protected void OnUpdated(TimeSpan elapsedTime)
